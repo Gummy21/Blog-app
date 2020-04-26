@@ -14,8 +14,6 @@ import { UserLoginComponent } from './components/user-login/user-login.component
 
 @NgModule({
   declarations: [
-    FormsModule,
-    HttpClientModule,
     AppComponent,
     AddBlogComponent,
     BlogDetailsComponent,
@@ -26,7 +24,9 @@ import { UserLoginComponent } from './components/user-login/user-login.component
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
