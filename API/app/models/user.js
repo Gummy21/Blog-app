@@ -25,9 +25,9 @@ module.exports = function(sequelize,Datatypes) {
       return bcrypt.compareSync(password, this.localPassword);
     };
 
-    User.associate = (db) => {
-      User.hasMany(db.blog);
-    };
+    // User.associate = (db) => {
+    //   User.hasMany(db.blog);
+    // };
     
     return User
 }

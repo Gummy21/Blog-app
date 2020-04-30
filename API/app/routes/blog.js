@@ -3,21 +3,21 @@ var router = express.Router();
 const blog = require('../controller/blog.controller');
 
     //Index/all
-    router.get('/blog/', blog.findAll);
+    router.get('/api/blog', blog.findAll);
     
     //Create
-    router.post('/blog/', blog.create);
+    router.post('/api/blog', blog.create);
      
     //Show
-    router.get('/blog/:id', blog.findById);
+    router.get('/api/blog/:id', blog.findById);
     
     //Update
-    router.put('/blog/:id', blog.update);
+    router.put('/api/blog/:id', blog.update);
     
     //Delete
-    router.delete('/blog/:id', blog.delete);
+    router.delete('/api/blog/:id', blog.delete);
     
     //Search
-    router.get('blog/results', blog.search)
+    router.get('/api/blog/results', blog.search)
 
 module.exports = router;

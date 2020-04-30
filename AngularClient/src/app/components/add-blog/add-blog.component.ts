@@ -1,43 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from 'src/app/services/blog.service';
+import { Location } from '@angular/common';
+import { Blog } from 'src/app/models/blog';
 
 @Component({
   selector: 'app-add-blog',
   templateUrl: './add-blog.component.html',
   styleUrls: ['./add-blog.component.css']
 })
-export class AddBlogComponent implements OnInit {
-  blog = {
-    title: '',
-    content: ''
-  };
+export class AddBlogComponent { 
+  blog = new Blog();
   submitted = false;
-  constructor(private blogService: BlogService) { }
+  constructor(private blogService: BlogService, 
+  private location: Location)  {}
 
-  ngOnInit() {
-  }
-
-  saveBlog(){
-    const data = {
-      title: this.blog.title,
-      content: this.blog.content
-    };
-    
-    this.blogService.create(data)
-    .subscribe(
-      response => {
-        console.log(response);
-        this.submitted = true;
-      },
-      error => {
-        console.log(error)
-      });
-  }
-  newBlog(){
+  newBlog(): void {
     this.submitted = false;
-    this.blog = {
-      title: '',
-      content: ''
-    };
+    this.blog = new Blog();
+  }
+
+  addBlog(){
+    this.submitted = true;
+    this.save();
+  }
+  goBack(): void{
+    this.location.back();
+  }
+  private save(): void{
+    this.blogService.create(this.blog).subscribe();
   }
 }

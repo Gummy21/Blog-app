@@ -1,1 +1,4 @@
-<p>blog-list works!</p>
+<h5>All blogs</h5>
+<li *ngFor="let blog of blogs">
+  <a [routerLink]="['/blog', blog.id]" style="color:black"><span class="badge badge-dark">{{blog.id}}</span> -> {{ blog.title }}</a>
+</li>

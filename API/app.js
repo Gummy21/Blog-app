@@ -4,7 +4,8 @@ const  express          = require("express"),
        flash            = require("connect-flash"),
        bodyParser       = require("body-parser"),
        methodOverride   = require("method-override"), 
-       cookieParser     = require('cookie-parser');
+       cookieParser     = require('cookie-parser'),
+       router           = require("./app/routes/blog")
  
 
 
@@ -21,7 +22,7 @@ var corsOptions = {
   }
 
 
-
+app.use(router)
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
 app.set("view engine", "ejs");

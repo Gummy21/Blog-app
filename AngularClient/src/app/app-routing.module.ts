@@ -8,7 +8,6 @@ import { UserLoginComponent } from './components/user-login/user-login.component
 import { UserLogoutComponent } from './components/user-logout/user-logout.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'blog', pathMatch: 'full' },
   { path: 'blog', component: BlogListComponent },
   { path: 'blog/:id', component: BlogDetailsComponent },
   { path: 'blog/results', component:BlogDetailsComponent},
@@ -16,6 +15,7 @@ const routes: Routes = [
   { path: 'register', component:UserAddComponent},
   { path: 'login', component:UserLoginComponent},
   { path: 'logout', component:UserLogoutComponent},
+  { path: '', redirectTo: 'blog', pathMatch: 'full' }
   
 ];
 

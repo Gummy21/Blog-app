@@ -1,10 +1,11 @@
 const db = require('../models');
 const { QueryTypes } = require('sequelize');
-
+// {include: [{model: db.user}]}
+// {user: req.session.user}
 //INDEX
 exports.findAll = (req,res) => { 
-   db.blog.findAll({include: [{model: db.user}]}).then(blogs => {
-       res.json({user: req.session.user},blogs.sort(function(c1,c2){return c1.id - c2,id}));
+   db.blog.findAll().then(blogs => {
+       res.json(blogs.sort(function(b1,b2){return b1.id - b2.id}));
     }).catch(err => {
         console.log(err);
         res.status(500).json({msg: "error", details: err});
