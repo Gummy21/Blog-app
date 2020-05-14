@@ -1,11 +1,11 @@
 const db = require('../models');
 const { QueryTypes } = require('sequelize');
-// {include: [{model: db.user}]}
-// {user: req.session.user}
+
+
 //INDEX
 exports.findAll = (req,res) => { 
-   db.blog.findAll().then(blogs => {
-       res.json(blogs.sort(function(b1,b2){return b1.id - b2.id}));
+   db.blog.findAll({include: [{model: db.user}]}).then(blogs => {
+       res.send(blogs);
     }).catch(err => {
         console.log(err);
         res.status(500).json({msg: "error", details: err});
@@ -16,10 +16,10 @@ exports.findAll = (req,res) => {
 exports.create = (req,res) => {
    const title = req.body.title;
    const content = req.body.content;
-   const userId    = req.session.user.id
-   const newBlog = { title: title, content: content, userId: userId};
+   const userId   = req.body.userId
+   const newBlog = { title: title, content: content,userId: userId};
   db.blog.create(newBlog).then(blog => {
-    res.json(blog);
+    res.send(blog);
    }).catch(err => {
        console.log(err);
        res.status(500).json({msg: "error", details: err});
@@ -29,8 +29,8 @@ exports.create = (req,res) => {
 //SHOW
 exports.findById = (req,res) => {
     var id = req.params.id;
-    db.blog.findAll({where: {id}, attributes: ['title','content', 'userId', 'id']}).then(blog => {
-        res.json(blog,{currentUser: req.user})
+    db.blog.findAll({where: {id}, attributes: ['title','content', 'id']}).then(blog => {
+        res.json(blog)
     })
 };
 //UPDATE

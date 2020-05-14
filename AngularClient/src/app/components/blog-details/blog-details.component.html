@@ -1,1 +1,20 @@
-<p>blog-details works!</p>
+
+<div *ngIf="currentBlog" class="edit-form">
+    <div class="container" *ngFor="let blog of data">
+        <h4>{{blog.title}}</h4>
+        {{blog.content}}
+    </div>
+    <button class="badge badge-danger mr-2" (click)="delete()">
+      Delete
+    </button>
+  
+    <button type="submit" class="badge badge-success" (click)="update()">
+      Update
+    </button>
+    <p>{{ message }}</p>
+</div>
+  
+  <div *ngIf="!currentBlog">
+    <br />
+    <p>Cannot access this blog...</p>
+  </div>

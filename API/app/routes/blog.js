@@ -1,23 +1,25 @@
-var express = require('express');
-var router = express.Router();
+module.exports = app => {
+var router = require("express").Router();
 const blog = require('../controller/blog.controller');
 
     //Index/all
-    router.get('/api/blog', blog.findAll);
+    router.get('/', blog.findAll);
     
     //Create
-    router.post('/api/blog', blog.create);
+    router.post('/', blog.create);
      
     //Show
-    router.get('/api/blog/:id', blog.findById);
+    router.get('/:id', blog.findById);
     
     //Update
-    router.put('/api/blog/:id', blog.update);
+    router.put('/:id', blog.update);
     
     //Delete
-    router.delete('/api/blog/:id', blog.delete);
+    router.delete('/:id', blog.delete);
     
     //Search
-    router.get('/api/blog/results', blog.search)
+    router.get('/results', blog.search)
 
-module.exports = router;
+    app.use('/api/blog', router);
+
+};

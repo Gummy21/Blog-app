@@ -25,29 +25,14 @@ exports.login = (req,res) =>{
           username: req.body.username
         }
       }).then(user => {
-        if(!user){
-          res.redirect("/login");
-        } else {
           bcrypt.compare(req.body.password, user.password, function (err,result) {
             if(result == true) {
                 req.session.user = user.dataValues;
                 res.json(user)
-              res.redirect('/blog');
             } else {
-              res.redirect('/login')
+              return false
             }
           });
-        }
       });
     };
-
-//Logout
-exports.logout = (req,res) => {
-  if (req.session.user && req.cookies.user_sid) {
-    res.clearCookie('user_sid');
-    res.redirect('/');
-} else {
-    res.redirect('/login');
-}
-};
 

@@ -3,13 +3,11 @@ const  express          = require("express"),
        cors             = require("cors"),
        flash            = require("connect-flash"),
        bodyParser       = require("body-parser"),
-       methodOverride   = require("method-override"), 
-       cookieParser     = require('cookie-parser'),
-       router           = require("./app/routes/blog")
+       cookieParser     = require('cookie-parser');
  
 
 
-db         = require("./app/models/");
+db = require("./app/models/");
 
 
 db.sequelize.sync({
@@ -22,9 +20,8 @@ var corsOptions = {
   }
 
 
-app.use(router)
+
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
 app.use(cors(corsOptions))
 app.use(bodyParser.json())
@@ -53,8 +50,8 @@ app.use(function(req, res, next){
     next();
 });
 
-
-
+require("./app/routes/blog")(app)
+require("./app/routes/index")(app)
 app.listen(8887,function(){
     console.log("Server started on port 8887")
 });

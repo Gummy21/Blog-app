@@ -6,12 +6,12 @@ import { AddBlogComponent } from './components/add-blog/add-blog.component';
 import { UserAddComponent } from './components/user-add/user-add.component';
 import { UserLoginComponent } from './components/user-login/user-login.component';
 import { UserLogoutComponent } from './components/user-logout/user-logout.component';
-
+import { AuthGuard} from './helpers/auth.guard';
 const routes: Routes = [
   { path: 'blog', component: BlogListComponent },
   { path: 'blog/:id', component: BlogDetailsComponent },
   { path: 'blog/results', component:BlogDetailsComponent},
-  { path: 'add', component: AddBlogComponent },
+  { path: 'add', component: AddBlogComponent, canActivate: [AuthGuard] },
   { path: 'register', component:UserAddComponent},
   { path: 'login', component:UserLoginComponent},
   { path: 'logout', component:UserLogoutComponent},

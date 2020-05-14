@@ -1,44 +1,39 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {  Blog  } from '../models/blog'
-import { Observable } from 'rxjs';
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+
+
+const baseUrl = 'http://localhost:8887/api/blog';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BlogService {  
-  private baseUrl = 'http://localhost:8887/api/blog';
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Blog[]> {
-    console.log(this.http.get<Blog[]>(this.baseUrl))
-    return this.http.get<Blog[]>(this.baseUrl)
+  getAll() {
+   
+    return this.http.get(baseUrl);
    
   }
-  get(id:number): Observable<Blog>{
-    return this.http.get<Blog>(`${this.baseUrl}/${id}`)
+  get(id:number) {
+    return this.http.get(`${baseUrl}/${id}`)
   }
 
-  create(blog: Blog): Observable<Blog> {
-    return this.http.post<Blog>(this.baseUrl, blog, httpOptions);
+  create(data) {
+    return this.http.post(baseUrl, data);
   }
 
-  update(blog: Blog): Observable<any> {
-    return this.http.put(this.baseUrl, blog, httpOptions);
+  update(id, data){
+    return this.http.put(baseUrl, data);
   }
 
-  delete(blog: Blog | number): Observable<Blog> {
-      const id = typeof blog === 'number' ? blog: blog.id;
-      const url = `${this.baseUrl}/${id}`;
-      return this.http.delete<Blog>(url, httpOptions);
+  delete(id) {
+      return this.http.delete(`${baseUrl}/${id}`);
     }
 
-  find(title: string): Observable<Blog> {
-    return this.http.get<Blog>(`${this.baseUrl}?title=${title}`);
+  find(title: string) {
+    return this.http.get(`${baseUrl}?title=${title}`);
   }
 
 }

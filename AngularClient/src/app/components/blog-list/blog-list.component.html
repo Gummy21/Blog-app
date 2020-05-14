@@ -1,4 +1,12 @@
 <h5>All blogs</h5>
-<li *ngFor="let blog of blogs">
-  <a [routerLink]="['/blog', blog.id]" style="color:black"><span class="badge badge-dark">{{blog.id}}</span> -> {{ blog.title }}</a>
-</li>
+<ul class="list-group">
+    <li
+      class="list-group-item"
+      *ngFor="let blog of blogs; let i = index"
+      [class.active]="i == currentIndex">
+      {{ blog.title }}
+      <a class="badge badge-info" href="/blog/{{ blog.id }}">
+        See full
+      </a>
+    </li>
+  </ul>
