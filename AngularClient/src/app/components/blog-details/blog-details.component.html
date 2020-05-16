@@ -1,18 +1,21 @@
 
 <div *ngIf="currentBlog" class="edit-form">
-    <div class="container" *ngFor="let blog of data">
+    <div class="container" *ngFor="let blog of currentBlog">
         <h4>{{blog.title}}</h4>
         {{blog.content}}
+
     </div>
-    <button class="badge badge-danger mr-2" (click)="delete()">
+    <button class="btn btn-danger" (click)="deleteBlog()">
       Delete
     </button>
   
-    <button type="submit" class="badge badge-success" (click)="update()">
+    <button type="submit" class="btn btn-success" (click)="update()">
       Update
     </button>
     <p>{{ message }}</p>
+
 </div>
+
   
   <div *ngIf="!currentBlog">
     <br />

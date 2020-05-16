@@ -1,10 +1,12 @@
 const db = require('../models');
-const { QueryTypes } = require('sequelize');
+const { Op } = require('sequelize');
 
 
 //INDEX
 exports.findAll = (req,res) => { 
-   db.blog.findAll({include: [{model: db.user}]}).then(blogs => {
+    const title = req.query.title;
+    var condition = title ? {title: { [Op.like]: `%${title}%`}} : null
+   db.blog.findAll({where: condition,include: [{model: db.user}]}).then(blogs => {
        res.send(blogs);
     }).catch(err => {
         console.log(err);
@@ -29,8 +31,8 @@ exports.create = (req,res) => {
 //SHOW
 exports.findById = (req,res) => {
     var id = req.params.id;
-    db.blog.findAll({where: {id}, attributes: ['title','content', 'id']}).then(blog => {
-        res.json(blog)
+    db.blog.findAll({where: {id}}).then(data=> {
+        res.send(data)
     })
 };
 //UPDATE
@@ -47,23 +49,19 @@ exports.update = (req,res) =>{
 
 // DELETE
 exports.delete = (req,res) =>{
-    var id = req.params.id
-    db.blog.destroy({where: {id}}).then(() =>{
-     res.redirect("/blog")
+    const id = req.params.id;
+    db.blog.destroy({where: {id:id}}).then(num => {
+        if (num == 1) {
+            res.send({
+              message: "Blog was deleted successfully!"
+            });
+        } else {
+            res.send({
+              message: `Cannot delete Blog with id=${id}. Maybe Blog was not found!`
+            });
+          }
     }).catch(err => {
         console.log(err);
         res.status(500).json({msg: "error", details: err});
       });
-};
-// SEARCH
-exports.search = (req,res) => {
-    var query = req.body.searchData
-    db.sequelize.query('SELECT * FROM blog WHERE title LIKE :search_title',
-    {
-        replacements: {search_title: query + "%"},
-        type: QueryTypes.SELECT
-    }).then(userSD =>{
-        res.json({results: userSD})
-    })
-    
 };

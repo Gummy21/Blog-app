@@ -16,7 +16,7 @@ export class BlogService {
     return this.http.get(baseUrl);
    
   }
-  get(id:number) {
+  get(id) {
     return this.http.get(`${baseUrl}/${id}`)
   }
 
@@ -29,10 +29,10 @@ export class BlogService {
   }
 
   delete(id) {
-      return this.http.delete(`${baseUrl}/${id}`);
+      return this.http.delete(`${baseUrl}/${id}`)
     }
 
-  find(title: string) {
+  find(title) {
     return this.http.get(`${baseUrl}?title=${title}`);
   }
 

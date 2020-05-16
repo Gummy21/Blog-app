@@ -17,8 +17,6 @@ const blog = require('../controller/blog.controller');
     //Delete
     router.delete('/:id', blog.delete);
     
-    //Search
-    router.get('/results', blog.search)
 
     app.use('/api/blog', router);
 

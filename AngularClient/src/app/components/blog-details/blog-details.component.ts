@@ -10,23 +10,26 @@ import { ActivatedRoute,Router } from '@angular/router';
 export class BlogDetailsComponent implements OnInit {
   currentBlog = null;
   data:any;
+  blogId = this.route.snapshot.paramMap.get('id');
   message = '';
   constructor(
     private blogService: BlogService,
     private route: ActivatedRoute,
     private router: Router
-    ) { }
+    ) { ;
+     }
 
   ngOnInit(){
-    this.get(this.route.snapshot.paramMap.get('id'));
-   
+    this.message = '';
+    this.getBlog(this.route.snapshot.paramMap.get('id'));
+    
   }
-  get(id){
-    return this.blogService.get(id)
+  getBlog(id){
+    this.blogService.get(id)
     .subscribe(
-      data => {
-        this.currentBlog = data;
-        this.data = data;
+      data=> {
+        this.currentBlog = data;  
+        console.log(data);
       },
       error => {
         console.log(error);
@@ -35,10 +38,10 @@ export class BlogDetailsComponent implements OnInit {
   }
 
   update(){
-    this.blogService.update(this.currentBlog.id, this.currentBlog)
+    this.blogService.update(this.blogId, this.currentBlog)
     .subscribe(
-      res => {
-        console.log(res)
+      response => {
+        console.log(response)
         this.message = 'The blog was updated successfully'
       },
       error => {
@@ -46,18 +49,17 @@ export class BlogDetailsComponent implements OnInit {
       })
   }
 
-  delete(){
-    this.blogService.delete(this.currentBlog.id)
-    .subscribe(
-      res => {
-        console.log(res)
-        this.router.navigate(['/blog'])
-      },
-      error => {
-        console.log(error);
-      }
-)
+  deleteBlog() {
+    this.blogService.delete(this.blogId)
+      .subscribe(
+        response => {
+          console.log(response);
+          this.router.navigate(['/blog']);
+        },
+        error => {
+          console.log(error);
+        });
   }
 
-
+  
 }

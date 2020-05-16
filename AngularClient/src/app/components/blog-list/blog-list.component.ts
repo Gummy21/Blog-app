@@ -10,6 +10,7 @@ import { BlogService } from '../../services/blog.service';
 export class BlogListComponent implements OnInit {
   blogs: any;
   currentIndex = -1;
+  title: '';
   constructor(private blogService: BlogService) {}
 
   ngOnInit(){
@@ -26,5 +27,15 @@ export class BlogListComponent implements OnInit {
       }
     );
   }
-
+  search(){
+    this.blogService.find(this.title)
+    .subscribe(
+        data => {
+            this.blogs = data;
+            console.log(data)
+        },
+        error => {
+          console.log(error)
+        });
+  }
 }
