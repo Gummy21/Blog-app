@@ -40,7 +40,6 @@ exports.update = (req,res) =>{
     var id = req.params.id;
     var updatedValues = {title:req.body.title, content: req.body.content};
     db.blog.update(updatedValues,{where: {id}}).then(() => {
-            res.redirect("/blog/" + id);
         }).catch(err => {
             console.log(err);
             res.status(500).json({msg: "error", details: err});

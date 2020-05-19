@@ -37,18 +37,6 @@ export class BlogDetailsComponent implements OnInit {
     );
   }
 
-  update(){
-    this.blogService.update(this.blogId, this.currentBlog)
-    .subscribe(
-      response => {
-        console.log(response)
-        this.message = 'The blog was updated successfully'
-      },
-      error => {
-        console.log(error);
-      })
-  }
-
   deleteBlog() {
     this.blogService.delete(this.blogId)
       .subscribe(

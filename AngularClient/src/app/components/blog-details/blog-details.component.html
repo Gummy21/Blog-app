@@ -1,6 +1,7 @@
 
-<div *ngIf="currentBlog" class="edit-form">
-    <div class="container" *ngFor="let blog of currentBlog">
+<div *ngIf="currentBlog" class="details-form" >
+  <div *ngFor="let blog of currentBlog">
+    <div class="container" >
         <h4>{{blog.title}}</h4>
         {{blog.content}}
 
@@ -9,11 +10,10 @@
       Delete
     </button>
   
-    <button type="submit" class="btn btn-success" (click)="update()">
-      Update
-    </button>
-    <p>{{ message }}</p>
-
+    <a class="btn btn-success" href="/edit/{{ blog.id }}">
+      Edit
+    </a>
+  </div>
 </div>
 
   

@@ -24,8 +24,8 @@ export class BlogService {
     return this.http.post(baseUrl, data);
   }
 
-  update(id, data){
-    return this.http.put(baseUrl, data);
+  update(id,data) {
+    return this.http.put(`${baseUrl}/${id}`, data);
   }
 
   delete(id) {
