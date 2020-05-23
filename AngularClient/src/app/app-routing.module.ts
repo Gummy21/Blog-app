@@ -8,7 +8,7 @@ import { BlogUpdateComponent } from './components/blog-update/blog-update.compon
 
 import { UserAddComponent } from './components/user-add/user-add.component';
 import { UserLoginComponent } from './components/user-login/user-login.component';
-import { UserLogoutComponent } from './components/user-logout/user-logout.component';
+
 
 
 
@@ -18,10 +18,9 @@ const routes: Routes = [
   { path: 'blog/:id', component: BlogDetailsComponent },
   { path: 'blog/results', component:BlogDetailsComponent},
   { path: 'add', component: AddBlogComponent, canActivate: [AuthGuard] },
-  { path: 'edit/:id', component: BlogUpdateComponent},
+  { path: 'edit/:id', component: BlogUpdateComponent, canActivate: [AuthGuard]},
   { path: 'register', component:UserAddComponent},
   { path: 'login', component:UserLoginComponent},
-  { path: 'logout', component:UserLogoutComponent},
   { path: '', redirectTo: 'blog', pathMatch: 'full' }
   
 ];

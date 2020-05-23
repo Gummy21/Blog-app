@@ -39,8 +39,16 @@ exports.findById = (req,res) => {
 exports.update = (req,res) =>{
     var id = req.params.id;
     var updatedValues = {title:req.body.title, content: req.body.content};
-    db.blog.update(updatedValues,{where: {id}}).then(() => {
-        }).catch(err => {
+    db.blog.update(updatedValues,{where: {id}}).then(num => {
+        if (num == 1) {
+            res.send({
+              message: "Blog was updated successfully!"
+            });
+        } else {
+            res.send({
+              message: `Cannot update Blog with id=${id}. Maybe Blog was not found!`
+            });
+          }}).catch(err => {
             console.log(err);
             res.status(500).json({msg: "error", details: err});
           });

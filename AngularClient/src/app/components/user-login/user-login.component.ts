@@ -14,7 +14,7 @@ export class UserLoginComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error = '';
+  err = '';
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -53,8 +53,9 @@ onSubmit() {
           data => {
             this.router.navigate([this.returnUrl]);
           },
-          error => {
-              this.error = error;
+          err => {
+              err = 'Incorrect username or password'
+              this.err = err;
               this.loading = false;
           });
 }

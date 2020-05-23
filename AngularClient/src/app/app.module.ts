@@ -13,7 +13,6 @@ import { AddBlogComponent } from './components/add-blog/add-blog.component';
 import { BlogDetailsComponent } from './components/blog-details/blog-details.component';
 import { BlogListComponent } from './components/blog-list/blog-list.component';
 import { UserAddComponent } from './components/user-add/user-add.component';
-import { UserLogoutComponent } from './components/user-logout/user-logout.component';
 import { UserLoginComponent } from './components/user-login/user-login.component';
 import { BlogUpdateComponent } from './components/blog-update/blog-update.component';
 
@@ -25,7 +24,6 @@ import { BlogUpdateComponent } from './components/blog-update/blog-update.compon
     BlogDetailsComponent,
     BlogListComponent,
     UserAddComponent,
-    UserLogoutComponent,
     UserLoginComponent,
     BlogUpdateComponent
   ],

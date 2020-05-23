@@ -1,9 +1,9 @@
-
+<div class="container">
 <div *ngIf="currentBlog" class="details-form" >
   <div *ngFor="let blog of currentBlog">
     <div class="container" >
-        <h4>{{blog.title}}</h4>
-        {{blog.content}}
+        <h4 class="text-justify-center">{{blog.title}}</h4>
+        <p>{{blog.content}}</p>
 
     </div>
     <button class="btn btn-danger" (click)="deleteBlog()">
@@ -21,3 +21,4 @@
     <br />
     <p>Cannot access this blog...</p>
   </div>
+</div>  

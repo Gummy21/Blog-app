@@ -48,9 +48,10 @@ export class BlogUpdateComponent implements OnInit {
     this.blogService.update(this.id,data)
     .subscribe(
       response => {
+        this.router.navigate(['/blog']);
         console.log(response)
         this.message = 'The blog was updated successfully'
-        this.router.navigate(['/blog']);
+       
       },
       error => {
         console.log(error);

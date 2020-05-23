@@ -1,34 +1,26 @@
-<div class="col-md-6">
-  <div class="input-group mb-3">
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Search by title"
-      [(ngModel)]="title"
-    />
-    <div class="input-group-append">
-      <button
-        class="btn btn-outline-secondary"
-        type="button"
-        (click)="search()"
-      >
-        Search
-      </button>
+<div class="container">
+  <div class="col-sm-4">
+    <div class="input-group mb-3" >
+      <input type="text" class="form-control" placeholder="Search by title" [(ngModel)]="title" />
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" (click)="search()">
+          Search
+        </button>
+      </div>
     </div>
   </div>
-</div>
+  <div class="row">
+    <div class="col-sm-4 card-deck" *ngFor="let blog of blogs; let i = index" [class.active]="i == currentIndex">
+      <div class="card border-light text-center mb-3">
+        <div class="list-group-item">
+          <h5 class="card-title"> {{ blog.title | slice:0:25}}</h5>
+          <p class="card-text">{{blog.content | slice:0:20}}</p>
+          <a class="badge badge-info card-link" href="/blog/{{ blog.id }}">
+            See full
+          </a>
 
-<div class="col-md-6">
-<ul class="list-group">
-  <li
-    class="list-group-item"
-    *ngFor="let blog of blogs; let i = index"
-    [class.active]="i == currentIndex"
-  >
-    {{ blog.title }}
-    <a class="badge badge-info" href="/blog/{{ blog.id }}">
-      See full
-    </a>
-  </li>
-</ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {BlogService} from '../../services/blog.service'
 import { ActivatedRoute,Router } from '@angular/router';
 
+import { AuthenticationService } from '../../services/authentication.service'
+
 @Component({
   selector: 'app-blog-details',
   templateUrl: './blog-details.component.html',
@@ -14,6 +16,7 @@ export class BlogDetailsComponent implements OnInit {
   message = '';
   constructor(
     private blogService: BlogService,
+    private authenticationService: AuthenticationService,
     private route: ActivatedRoute,
     private router: Router
     ) { ;
@@ -38,15 +41,23 @@ export class BlogDetailsComponent implements OnInit {
   }
 
   deleteBlog() {
-    this.blogService.delete(this.blogId)
-      .subscribe(
-        response => {
-          console.log(response);
-          this.router.navigate(['/blog']);
-        },
-        error => {
-          console.log(error);
-        });
+    const user = this.authenticationService.userValue;
+        if (user) {
+          this.blogService.delete(this.blogId)
+          .subscribe(
+            response => {
+              console.log(response);
+              this.router.navigate(['/blog']);
+            },
+            error => {
+              console.log(error);
+            });
+        }
+      else {
+        this.router.navigate(['/login']);
+        return false;
+      }
+    
   }
 
   

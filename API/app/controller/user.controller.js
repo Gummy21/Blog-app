@@ -2,6 +2,7 @@ var bcrypt = require('bcryptjs')
 var db = require("../models/")
 const saltRounds = 10;
 
+
 //Register p2
 exports.register = (req,res) =>{
     bcrypt.hash(req.body.password, saltRounds, function (err,hash) {
@@ -26,11 +27,13 @@ exports.login = (req,res) =>{
         }
       }).then(user => {
           bcrypt.compare(req.body.password, user.password, function (err,result) {
-            if(result == true) {
-                req.session.user = user.dataValues;
-                res.json(user)
+            if(result == false) {
+              res.status(404).end();
+              
             } else {
-              return false
+               req.session.user = user.dataValues;
+                res.json(user)
+              
             }
           });
       });
