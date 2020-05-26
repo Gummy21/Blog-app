@@ -31,7 +31,7 @@ exports.create = (req,res) => {
 //SHOW
 exports.findById = (req,res) => {
     var id = req.params.id;
-    db.blog.findAll({where: {id}}).then(data=> {
+    db.blog.findAll({where: {id},include: [{model: db.user}]}).then(data=> {
         res.send(data)
     })
 };

@@ -12,7 +12,7 @@ import { UserLoginComponent } from './components/user-login/user-login.component
 
 
 
-import { AuthGuard} from './helpers/auth.guard';
+import { AuthGuard} from '../app/helpers/auth.guard';
 const routes: Routes = [
   { path: 'blog', component: BlogListComponent },
   { path: 'blog/:id', component: BlogDetailsComponent },

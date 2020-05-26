@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BlogService} from '../../services/blog.service'
 import { ActivatedRoute,Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 
 
@@ -14,6 +15,8 @@ export class BlogUpdateComponent implements OnInit {
   currentBlog = null;
   id = this.route.snapshot.paramMap.get('id')
   data:any;
+  user = null;
+  authUser = this.authenticationService.userValue;
   message = '';
   updated = {
     title: "",
@@ -23,6 +26,7 @@ export class BlogUpdateComponent implements OnInit {
   constructor(
     private blogService: BlogService,
     private route: ActivatedRoute,
+    private authenticationService: AuthenticationService,
     private router: Router
     ) {}
 
@@ -31,14 +35,18 @@ export class BlogUpdateComponent implements OnInit {
       this.blogService.get(this.id)
       .subscribe(
         data=> {
-          this.currentBlog = data; 
-          console.log(data);
-        },
-        error => {
-          console.log(error);
-        }
-      );
-  }
+          this.currentBlog = data;
+          this.user = data;
+          for (var x of this.user) {
+            var y = Object(x);
+            if(this.authUser.id != y.user.id){
+              this.router.navigate(['/blog'])
+            }
+      }
+        
+      })
+    }
+    
 
   updateBlog(){
     const data ={

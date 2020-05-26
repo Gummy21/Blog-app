@@ -6,7 +6,7 @@ module.exports = function(sequelize, Datatypes){
           type: Datatypes.INTEGER
         },
         title: Datatypes.STRING,
-        content: Datatypes.STRING,
+        content: Datatypes.TEXT,
         createdAt: {
           type: Datatypes.DATE,
           defaultValue: sequelize.fn('NOW')

@@ -14,6 +14,7 @@
       <div class="card border-light text-center mb-3">
         <div class="list-group-item">
           <h5 class="card-title"> {{ blog.title | slice:0:25}}</h5>
+          <small class="text-muted"> By {{blog.user.username}}</small>
           <p class="card-text">{{blog.content | slice:0:20}}</p>
           <a class="badge badge-info card-link" href="/blog/{{ blog.id }}">
             See full

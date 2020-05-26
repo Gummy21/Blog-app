@@ -14,13 +14,14 @@
   
       <div class="form-group">
         <label for="content">content</label>
-        <input
+        <textarea
+          rows="4"
           class="form-control"
           id="content"
           required
           [(ngModel)]="blog.content"
           name="content"
-        />
+        ></textarea>
       </div>
   
       <button (click)="saveBlog()" class="btn btn-success">Submit</button>

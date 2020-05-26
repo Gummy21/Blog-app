@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { BlogService } from '../../services/blog.service';
 
+
 @Component({
   selector: 'app-blog-list',
   templateUrl: './blog-list.component.html',
@@ -9,9 +10,12 @@ import { BlogService } from '../../services/blog.service';
 })
 export class BlogListComponent implements OnInit {
   blogs: any;
+  
   currentIndex = -1;
   title: '';
-  constructor(private blogService: BlogService) {}
+  constructor(private blogService: BlogService) {
+   
+  }
 
   ngOnInit(){
     this.getAllBlogs();
